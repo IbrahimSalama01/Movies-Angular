@@ -1,0 +1,76 @@
+<div class="w-full">
+  <!-- Navbar -->
+  <p-menubar
+    class="shadow-md"
+    [style]="{ 'background-color': 'var(--surface-card)',width: '100%' }"
+  >
+    <!-- Start (left) -->
+    <ng-template pTemplate="start">
+      <div class="flex items-center gap-2 justify-between">
+        <!-- Drawer Toggle for mobile -->
+        <p-button
+          class="md:hidden p-button-text"
+          icon="pi pi-bars"
+          (click)="toggleSidebar()"
+          [style]="{ fontSize: '1.5rem' }"
+        ></p-button>
+
+        <!-- Logo -->
+        <img src="MoviesLogo.png" alt="Logo" class="hidden md:inline h-12 w-12" />
+        <span class="hidden md:inline text-xl font-bold">Movies</span>
+      </div>
+    </ng-template>
+
+    <!-- End (right links + theme toggle) -->
+    <ng-template pTemplate="end">
+      <div class="hidden md:flex items-center gap-6">
+        <a pButton routerLink="/all" class="p-button-text font-semibold text-sm">
+          All
+        </a>
+        <a pButton routerLink="/movies" class="p-button-text font-semibold text-sm">
+          Movies
+        </a>
+        <a pButton routerLink="/tvseries" class="p-button-text font-semibold text-sm">
+          TV Series
+        </a>
+        <a pButton routerLink="/people" class="p-button-text font-semibold text-sm">
+          People
+        </a>
+
+        <!-- Theme Toggle Button -->
+        <p-button
+          class="p-button-text"
+          (click)="toggleTheme()"
+          [icon]="isDarkTheme ? 'pi pi-sun' : 'pi pi-moon'"
+          [style]="{ fontSize: '1.5rem' }"
+        ></p-button>
+      </div>
+      <img src="MoviesLogo.png" alt="Logo" class=" md:hidden h-12 w-12" />
+    </ng-template>
+  </p-menubar>
+
+  <!-- Sidebar for Mobile -->
+  <p-drawer [(visible)]="sidebarVisible" position="left" class="md:hidden">
+    <div class="flex flex-col gap-6 p-6">
+      <div class="flex items-center gap-2 mb-6">
+        <img src="MoviesLogo.png" alt="Logo" class="h-12 w-12" />
+        <span class="text-xl font-bold">Movies</span>
+      </div>
+
+      <a pButton routerLink="/all" class="p-button-text font-semibold text-lg" (click)="sidebarVisible = false">All</a>
+      <a pButton routerLink="/movies" class="p-button-text font-semibold text-lg" (click)="sidebarVisible = false">Movies</a>
+      <a pButton routerLink="/tvseries" class="p-button-text font-semibold text-lg" (click)="sidebarVisible = false">TV Series</a>
+      <a pButton routerLink="/people" class="p-button-text font-semibold text-lg" (click)="sidebarVisible = false">People</a>
+
+      <!-- Theme Toggle inside sidebar (mobile) -->
+      <div class="flex justify-center mt-8">
+        <p-button
+          class="p-button-text"
+          (click)="toggleTheme()"
+          [icon]="isDarkTheme ? 'pi pi-sun' : 'pi pi-moon'"
+          [style]="{ fontSize: '1.5rem' }"
+        ></p-button>
+      </div>
+    </div>
+  </p-drawer>
+</div>
