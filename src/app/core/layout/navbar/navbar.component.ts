@@ -10,7 +10,8 @@ import { MenubarModule } from 'primeng/menubar';
   selector: 'app-navbar',
   imports: [DrawerModule, ButtonModule, MenuModule, RouterLink, MenubarModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
+  host:{ngSkipHydration: 'true'}
 })
 export class NavbarComponent implements OnInit{
   public sidebarVisible: boolean = false;
