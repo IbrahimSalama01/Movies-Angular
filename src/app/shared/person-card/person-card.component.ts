@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { IPerson } from '../../utils/Interfaces';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
