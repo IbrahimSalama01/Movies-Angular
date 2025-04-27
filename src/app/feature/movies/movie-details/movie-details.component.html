@@ -1,0 +1,115 @@
+<div class="p-6 space-y-8">
+
+  <!-- Backdrop Image -->
+  <div class="relative w-full h-64 md:h-96">
+    <img
+      [src]="'https://image.tmdb.org/t/p/original' + movie.backdrop_path"
+      alt="Backdrop"
+      class="w-full h-full object-cover rounded-lg shadow-md"
+    />
+    <div class="absolute inset-0 bg-black/50 rounded-lg"></div>
+    <div class="absolute bottom-4 left-6 text-white space-y-2">
+      <h1 class="text-3xl font-bold">{{ movie.title }}</h1>
+      <p class="italic">{{ movie.tagline }}</p>
+    </div>
+  </div>
+
+  <!-- Main Card -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- Poster -->
+    <div class="flex justify-center max-h-150">
+      <img
+        [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+        alt="Poster"
+        class="rounded-lg shadow-md  h-full"
+      />
+    </div>
+
+    <!-- Movie Details -->
+    <div class="md:col-span-2">
+      <p-card class="shadow-lg">
+        <div class="p-4 space-y-4">
+
+          <div class="flex flex-wrap gap-2">
+            <p-tag
+              *ngFor="let genre of movie.genres"
+              [value]="genre.name"
+              severity="info"
+            ></p-tag>
+          </div>
+
+          <div class="text-gray-700 text-justify leading-relaxed">
+            {{ movie.overview }}
+          </div>
+
+          <div class="flex flex-wrap gap-6 mt-4 text-gray-600">
+            <div><strong>Release Date:</strong> {{ movie.release_date }}</div>
+            <div><strong>Status:</strong> {{ movie.status }}</div>
+            <div><strong>Language:</strong> {{ movie.original_language | uppercase }}</div>
+            <div><strong>Runtime:</strong> {{ movie.runtime }} min</div>
+          </div>
+
+          <div class="flex items-center gap-4 mt-4">
+            <p-rating
+              [stars]="10"
+              [readonly]="true"
+              [(ngModel)]="movie.vote_average"
+              cancel="false"
+            ></p-rating>
+            <small class="text-gray-500">({{ movie.vote_count }} votes)</small>
+          </div>
+
+          <div class="flex flex-wrap gap-6 mt-4 text-gray-700">
+            <div><strong>Budget:</strong> ${{ movie.budget | number }}</div>
+            <div><strong>Revenue:</strong> ${{ movie.revenue | number }}</div>
+            <div><strong>Popularity:</strong> {{ movie.popularity }}</div>
+          </div>
+
+          <div class="mt-6">
+            <h3 class="font-semibold mb-2">Spoken Languages</h3>
+            <div class="flex flex-wrap gap-2">
+              <p-tag
+                *ngFor="let lang of movie.spoken_languages"
+                [value]="lang.english_name"
+                severity="success"
+              ></p-tag>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <h3 class="font-semibold mb-2">Production Companies</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div *ngFor="let company of movie.production_companies" class="flex items-center gap-3">
+                <img
+                  *ngIf="company.logo_path"
+                  [src]="'https://image.tmdb.org/t/p/w200' + company.logo_path"
+                  alt="Company Logo"
+                  class="w-12 h-12 object-contain bg-white rounded-md shadow"
+                />
+                <div>
+                  <div class="font-medium">{{ company.name }}</div>
+                  <small class="text-gray-500">{{ company.origin_country }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 flex justify-end">
+            <a
+              pButton
+              label="View on IMDB"
+              icon="pi pi-external-link"
+              class="p-button-rounded p-button-info"
+              [href]="'https://www.imdb.com/title/' + movie.imdb_id"
+              target="_blank"
+            ></a>
+          </div>
+
+        </div>
+      </p-card>
+    </div>
+
+  </div>
+
+</div>
